@@ -1,0 +1,32 @@
+.main-menu{
+    height: 10vh;
+    background-color: #252D35;
+    display: flex;
+    align-items: center;
+    justify-content: space-between ;
+    padding: 0.5rem  0.8rem 0 0.8rem;
+    .main-title{
+        text-align: left;
+        color:#edece8 ;
+    }
+    .nav-bar{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .list-item{
+            list-style: none;
+            margin: 0.2rem;
+            .btn-item{
+                padding: 0.5rem 0.8rem;
+                border: 1px solid #ded9d6;
+                background-color: #252D35;
+                border-radius: 12px;
+                color: #edece8;
+                &:hover{
+                    border:1px solid white ;
+                    background-color: #323a43;
+                }
+            }
+        }
+    }
+}

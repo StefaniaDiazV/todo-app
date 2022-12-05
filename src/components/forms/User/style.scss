@@ -1,0 +1,16 @@
+.formBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #edece8;
+    .userForm{
+        width: 60%;
+        background-color: #ded9d6;
+        padding: 3rem;
+        border-radius: 10px;
+        .add-btn{
+            background-color: #120727;
+            border-color:  #120727;
+        }
+    }
+}

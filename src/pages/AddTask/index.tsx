@@ -2,15 +2,10 @@ import { FC } from "react"
 import { Layout } from "../../components/layout"
 import { TaskForm } from '../../components/forms'
 
-
-type Props = {
-    onChangePage: (value:string) => void
-}
-
-const AddTask: FC<Props> = ({onChangePage}) => {
+const AddTask: FC = () => {
     return (
         <div>
-            <Layout onChangePage={onChangePage}>
+            <Layout>
                 <TaskForm/>
             </Layout>
         </div>

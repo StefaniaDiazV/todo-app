@@ -2,15 +2,11 @@ import { FC } from 'react'
 import { Layout } from '../../components/layout/index'
 import { LoginForm, UserForm } from '../../components/forms'
 
-type Props = {
-    onChangePage: (value:string) => void
-}
 
-
-const Login: FC<Props> = ({onChangePage}) => {
+const Login: FC = () => {
     return (
         <>
-            <Layout onChangePage={onChangePage}>
+            <Layout>
                 <LoginForm/>
             </Layout>            
         </>

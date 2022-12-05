@@ -2,14 +2,10 @@ import { FC } from 'react'
 import {Nav} from '../Nav'
 
 
-type Props = {
-    onChangePage: (value:string) => void
-}
-
-const Header: FC<Props> = ({onChangePage}) => {
+const Header: FC = () => {
     return (
         <header>
-            <Nav onChangePage={onChangePage}/>
+            <Nav/>
         </header>
     )
 }

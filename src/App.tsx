@@ -12,14 +12,14 @@ function App() {
 
   return (
     <div className="App">
-      { page === "Login" && <Login onChangePage={changePage} /> }
-      { page === "SignUp" && <SignUp onChangePage={changePage} /> }
-      { page === "Dashboard" && <Dashboard onChangePage={changePage} /> }
-      { page === "Task" && <Task onChangePage={changePage} /> }
-      { page === "Categories" && <Categories onChangePage={changePage} /> }
-      { page === "AddTask" && <AddTask onChangePage={changePage} /> }
-      { page === "AddCategory" && <AddCategory onChangePage={changePage} /> }
-      { page === "Profile" && <Profile onChangePage={changePage} /> }
+      { page === "Login" && <Login /> }
+      { page === "SignUp" && <SignUp  /> }
+      { page === "Dashboard" && <Dashboard /> }
+      { page === "Task" && <Task  /> }
+      { page === "Categories" && <Categories  /> }
+      { page === "AddTask" && <AddTask  /> }
+      { page === "AddCategory" && <AddCategory  /> }
+      { page === "Profile" && <Profile/> }
     </div>
   );
 }

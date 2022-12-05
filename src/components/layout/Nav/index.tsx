@@ -1,52 +1,49 @@
 import { FC } from 'react'
 import './style.scss'
 
-type Props = {
-    onChangePage: (value: string) => void
-}
 
-const Nav: FC<Props> = ({onChangePage}) => {
+const Nav: FC = ({}) => {
     return (
         <nav className="main-menu">
             <h1 className='main-title'>ToDoApp</h1>
             <ul className="nav-bar">
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Login')}>
+                    <button className="btn-item">
                         Login
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('SignUp')} >
+                    <button className="btn-item">
                         SignUp
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Dashboard')} >
+                    <button className="btn-item">
                         Dashboard
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Task')} >
+                    <button className="btn-item">
                         Task
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Categories')} >
+                    <button className="btn-item">
                         Categories
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('AddTask')} >
+                    <button className="btn-item">
                         AddTask
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('AddCategory')} >
+                    <button className="btn-item">
                         AddCategory
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Profile')} >
+                    <button className="btn-item">
                         Profile
                     </button>
                 </li>

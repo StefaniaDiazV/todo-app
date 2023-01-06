@@ -1,21 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { addTask } from '../../../services/tasks';
+import { idText } from 'typescript';
+import { categoriesService } from '../../../services';
+import { taskServices} from '../../../services/tasks';
+import { Category } from '../../../types';
 import './style.scss'
 
 const TaskForm = () => {
 
   const [title, setTitle] = useState('')
-  const [date, setDate] = useState('')
-  const [ catName, setCatName] = useState('')
+  const [dateNum, setDateNum] = useState('')
+  const [ idCategory, setIdCategory] = useState('')
+  const [ category1, setCategory1] = useState({})
   const [ description, setDescription ] = useState('')
   const [ status, setStatus] = useState('')
+  const [categories, setCategories] = useState<Category[]>([])
 
-  const handleSubmit = (e:any) => {
+  useEffect(() => {
+    categoriesService.getAll().then((data) => setCategories(data))
+  },[])
+
+  
+
+
+  const handleSubmit = async (e:any) => {
     e.preventDefault()
-    addTask({title, date, catName, description, status})
+
+    const date = new Date (dateNum)
+    const category = await categoriesService.get(idCategory)
+    setCategory1(category)
+    let a = {id: '', name: ''}
+    console.log(idCategory)
+    console.log(category1)
+    const rta = await taskServices.add({title, date, category, description, status})
+
   }
+
+
 
   return (
     <div className='formBox'>
@@ -35,17 +57,21 @@ const TaskForm = () => {
       <Form.Group className="mb-3" controlId="fecha">
         <Form.Label>Fecha</Form.Label>
         <Form.Control type="date" placeholder="Fecha"
-        value={date}
-        onChange={e => setDate(e.target.value)}
+        value={dateNum}
+        onChange={e => setDateNum(e.target.value)}
         />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="categoria">
         <Form.Label>Categoria</Form.Label>
-        <Form.Control type="text" placeholder="Categoria"
-        value={catName}
-        onChange={e => setCatName(e.target.value)}
-        />
+        <Form.Select onChange={c => setIdCategory(c.target.value) }>
+          {categories.map((elem) => {
+            return( 
+            <option key={elem.id} value={elem.id}>{elem.name}</option>
+            )
+          })}
+          
+        </Form.Select>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="descripción">

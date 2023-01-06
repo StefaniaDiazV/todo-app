@@ -1,25 +1,50 @@
-import { Task } from "../../types"
+import { Task, User } from "../../types"
+import { DB_BASE_URL } from "../../constants"
+import { mapToArray } from "../../helpers/mapToAray";
+import { Tab } from "react-bootstrap";
 
-const getTasks = () => {
-
+const getAll = async (): Promise<Task[]> => {
+    const response = await fetch (`${DB_BASE_URL}/tasks.json`);
+    const data = await response.json()
+    return mapToArray<Task>(data);
 }
 
-export const addTask = (payload: any ) => {
+type payload = Omit<Task, 'id'>
+
+const add = async (task: payload) => {
     const options = {
         method: 'POST',
-        body: JSON.stringify(payload)
+        body: JSON.stringify(task)
     }
-    fetch("https://todoapp-3798f-default-rtdb.firebaseio.com/tasks.json", options)
+    const response = await fetch(`${DB_BASE_URL}/tasks.json`, options)
+    const data = await response.json()
+    if(data.title) {
+        return true
+        } else {
+        return false
+        }
 }
 
-const getTask = (id:string) => {
 
+const get = async (id:string): Promise<Task> => {
+    const response = await fetch(`${DB_BASE_URL}/tasks/${id}.json`)
+    const data = await response.json()
+    return{ id, ...data}
 }
 
-const updateTask = (id:string, payload: Task) => {
-
+const update = async ({id, title, description, date, category}:Task) => {
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify({title, description, date, category})
+    }
+    const response = await fetch(`${DB_BASE_URL}/tasks/${id}.json`, options)
 }
 
-const removeTask = (id: string) => {
-    
+const remove = async (id: string) => {
+    const options = {
+        method: 'DELETE',
+    };
+    await fetch(`${DB_BASE_URL}/tasks/${id}.json`, options) 
 } 
+
+export const taskServices = { getAll, get, add, update, remove}

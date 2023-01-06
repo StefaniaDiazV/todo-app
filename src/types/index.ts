@@ -19,6 +19,7 @@ export type Task = {
     date: Date
     category: Category
     description: string
+    status: string
 }
 
 // export type { User, Category, Task }

@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { Layout } from "../../components/layout"
 
-const Task: FC = () => {
+const Tasks: FC = () => {
     return (
         <div>
             <Layout>
@@ -11,4 +11,4 @@ const Task: FC = () => {
     )
 }
 
-export { Task }
+export { Tasks }

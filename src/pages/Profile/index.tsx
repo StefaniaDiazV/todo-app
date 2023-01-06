@@ -1,14 +1,10 @@
 import { FC } from "react"
 import { Layout } from "../../components/layout"
 
-type Props = {
-    onChangePage: (value:string) => void
-}
-
-const Profile: FC<Props> = ({onChangePage}) => {
+const Profile: FC = () => {
     return (
         <div>
-            <Layout onChangePage={onChangePage}>
+            <Layout>
                 <h1>Profile</h1>
             </Layout>  
         </div>

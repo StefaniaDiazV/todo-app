@@ -5,14 +5,13 @@ import './style.scss'
 
 
 type Props = {
-    onChangePage: (value:string) => void
     children: ReactNode
 }
 
-const Main: FC<Props> = ({children, onChangePage}) => {
+const Main: FC<Props> = ({children}) => {
     return (
         <div className='layout'>
-        <Header onChangePage={onChangePage}  />
+        <Header />
         <main className='main'>
             {children}
         </main>

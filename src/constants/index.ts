@@ -1,0 +1,1 @@
+export const DB_BASE_URL = 'https://todoapp-3798f-default-rtdb.firebaseio.com'

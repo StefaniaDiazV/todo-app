@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { addTask } from '../../../services/task';
+import { addTask } from '../../../services/tasks';
 import './style.scss'
 
 const TaskForm = () => {

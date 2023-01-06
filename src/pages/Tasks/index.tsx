@@ -1,18 +1,14 @@
 import { FC } from "react"
 import { Layout } from "../../components/layout"
 
-type Props = {
-    onChangePage: (value:string) => void
-}
-
-const Task: FC<Props> = ({onChangePage}) => {
+const Tasks: FC = () => {
     return (
         <div>
-            <Layout onChangePage={onChangePage}>
+            <Layout>
                 <h1>Task</h1>
             </Layout>            
         </div>
     )
 }
 
-export { Task }
+export { Tasks }

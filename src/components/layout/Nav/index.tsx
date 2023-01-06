@@ -1,53 +1,67 @@
 import { FC } from 'react'
 import './style.scss'
+import { NavLink } from 'react-router-dom'
 
-type Props = {
-    onChangePage: (value: string) => void
-}
 
-const Nav: FC<Props> = ({onChangePage}) => {
+const Nav: FC = ({}) => {
     return (
         <nav className="main-menu">
             <h1 className='main-title'>ToDoApp</h1>
             <ul className="nav-bar">
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Login')}>
+                    <button className="btn-item">
+                        <NavLink to={'/login'}>
                         Login
+                        </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('SignUp')} >
+                    <button className="btn-item">
+                        <NavLink to={'/sign-up'}>
                         SignUp
+                        </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Dashboard')} >
+                    <button className="btn-item">
+                        <NavLink to={'/dashboard'}>
                         Dashboard
+                        </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Task')} >
-                        Task
+                    <button className="btn-item">
+                        <NavLink to={'/tasks'}>
+                        Tasks
+                        </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Categories')} >
+                    <button className="btn-item">
+                        <NavLink to={'/categories'}>
                         Categories
+                        </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('AddTask')} >
+                    <button className="btn-item">
+                        <NavLink to={'/add-task'}>
                         AddTask
+                        </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('AddCategory')} >
+                    <button className="btn-item">
+                        <NavLink to={'/add-category'}>
                         AddCategory
+                        </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item" onClick={() => onChangePage('Profile')} >
+                    <button className="btn-item">
+                        <NavLink to={'/profile'}>
                         Profile
+                        </NavLink>
                     </button>
                 </li>
             </ul>

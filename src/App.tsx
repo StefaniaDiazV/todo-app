@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
-import { AddCategory, AddTask, Categories, Dashboard, Login, Profile, SignUp, Task } from './pages';
+import { AddCategory, AddTask, Categories, Dashboard, Login, Profile, SignUp, Tasks, Users } from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes }  from 'react-router-dom'
 
 function App() {
-
-  const [page, setPage] = useState('Login')
-
-  const changePage = (value:string) => {
-    setPage(value)
-  }
-
   return (
-    <div className="App">
-      { page === "Login" && <Login onChangePage={changePage} /> }
-      { page === "SignUp" && <SignUp onChangePage={changePage} /> }
-      { page === "Dashboard" && <Dashboard onChangePage={changePage} /> }
-      { page === "Task" && <Task onChangePage={changePage} /> }
-      { page === "Categories" && <Categories onChangePage={changePage} /> }
-      { page === "AddTask" && <AddTask onChangePage={changePage} /> }
-      { page === "AddCategory" && <AddCategory onChangePage={changePage} /> }
-      { page === "Profile" && <Profile onChangePage={changePage} /> }
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/'>
+          <Route index element={ <Dashboard />}/>
+          <Route path='dashboard' element={ <Dashboard />}/>
+          <Route path='login' element={ <Login />}/>
+          <Route path='sign-up' element={ <SignUp/>}/>
+          <Route path='sign-up/:id' element={ <SignUp/>}/>
+
+          <Route path='tasks' element={ <Tasks />}/>
+          <Route path='categories' element={ <Categories />}/>
+          <Route path='add-task' element={ <AddTask/>}/>
+          <Route path='add-category' element={ <AddCategory />}/>
+          <Route path='add-category/:id' element={ <AddCategory />}/>
+          <Route path='profile' element={ <Profile/>}/>
+          <Route path='users' element={ <Users/>}/>
+        </Route> 
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -4,12 +4,13 @@ export type User = {
     lastname: string
     email: string
     password: string
-    birthdate: Date
+    birthdate: Date | undefined
 }
 
 export type Category = {
     id: string
     name: string
+    color?: string
 }
 
 export type Task = {

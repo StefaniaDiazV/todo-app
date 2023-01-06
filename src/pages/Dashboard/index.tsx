@@ -1,15 +1,22 @@
 import { FC } from "react"
+import { Button } from "../../components/commons/Button";
 import { Layout } from "../../components/layout"
 
-type Props = {
-    onChangePage: (value:string) => void
-}
 
-const Dashboard: FC<Props> = ({onChangePage}) => {
+const Dashboard: FC = () => {
     return (
         <div>
-            <Layout onChangePage={onChangePage}>
+            <Layout>
                 <h1> Dashboard</h1>
+                <Button
+          variant="primary"
+          icon="x-circle"
+          handleClick={() => {
+            console.log("Inciar sesión");
+          }}
+        >
+          Iniciar Sesión
+        </Button>
             </Layout>           
         </div>
     )

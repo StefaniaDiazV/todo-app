@@ -12,7 +12,6 @@ const TaskForm = () => {
   const [title, setTitle] = useState('')
   const [dateNum, setDateNum] = useState('')
   const [ idCategory, setIdCategory] = useState('')
-  const [ category1, setCategory1] = useState({})
   const [ description, setDescription ] = useState('')
   const [ status, setStatus] = useState('')
   const [categories, setCategories] = useState<Category[]>([])
@@ -29,10 +28,6 @@ const TaskForm = () => {
 
     const date = new Date (dateNum)
     const category = await categoriesService.get(idCategory)
-    setCategory1(category)
-    let a = {id: '', name: ''}
-    console.log(idCategory)
-    console.log(category1)
     const rta = await taskServices.add({title, date, category, description, status})
 
   }
@@ -64,7 +59,7 @@ const TaskForm = () => {
 
       <Form.Group className="mb-3" controlId="categoria">
         <Form.Label>Categoria</Form.Label>
-        <Form.Select onChange={c => setIdCategory(c.target.value) }>
+        <Form.Select onChange={e => setIdCategory(e.target.value) }>
           {categories.map((elem) => {
             return( 
             <option key={elem.id} value={elem.id}>{elem.name}</option>

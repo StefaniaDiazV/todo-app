@@ -1,11 +1,57 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Layout } from "../../components/layout"
+import Card from 'react-bootstrap/Card';
+import { Task } from "../../types";
+import { taskServices } from "../../services/tasks";
+import './style.scss'
+import { Button } from  "../../components/commons/Button";
 
 const Tasks: FC = () => {
+
+  const [tasks, setTasks] = useState<Task[]>([])
+
+  const getTasks = async () => {
+    const rta = await taskServices.getAll()
+    setTasks(rta)
+  }
+
+  const removeTasks = async (id: string) => {
+    await taskServices.remove(id)
+    getTasks()
+    console.log('one')
+  }
+
+  if(!tasks.length) getTasks()
+
     return (
         <div>
             <Layout>
-                <h1>Task</h1>
+               
+                <div className="container d-flex flex-column">
+                  <h1>Tareas</h1>
+                <div className="container d-flex">
+                {tasks.map((elem) => {
+                  return(
+                  <Card className="task-cards" key={elem.id} style={{ width: '18rem' }}>
+                    <Card.Body>
+                    <Card.Title>{elem.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">{elem.category.name}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">{elem.status}</Card.Subtitle>
+                    <Card.Text>
+                      {elem.description}
+                      </Card.Text>
+                    <Card.Subtitle className="mb-2 text-muted">{new Date(elem.date).getDate().toLocaleString()}/{new Date(elem.date).getMonth()+1}
+                    /{new Date(
+                      elem.date).getFullYear()}</Card.Subtitle>  
+                    <Button variant="primary" handleClick={() => removeTasks(elem.id)} >Eliminar</Button>
+                    <Card.Link href="#">Editar</Card.Link>
+                  </Card.Body>
+                  </Card>
+                  )
+
+                })}
+                </div>
+                </div>
             </Layout>            
         </div>
     )

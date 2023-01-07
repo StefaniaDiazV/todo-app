@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate, useParams } from 'react-router-dom';
 import { idText } from 'typescript';
 import { categoriesService } from '../../../services';
 import { taskServices} from '../../../services/tasks';
@@ -12,6 +13,7 @@ const TaskForm = () => {
   const [title, setTitle] = useState('')
   const [dateNum, setDateNum] = useState('')
   const [ idCategory, setIdCategory] = useState('')
+  const [category, setCategory] = useState<Category>()
   const [ description, setDescription ] = useState('')
   const [ status, setStatus] = useState('')
   const [categories, setCategories] = useState<Category[]>([])
@@ -20,18 +22,37 @@ const TaskForm = () => {
     categoriesService.getAll().then((data) => setCategories(data))
   },[])
 
-  
+  const navigate = useNavigate()
+  const {id} = useParams()
 
+  const getTask = async () => {
+    if (id)  {
+      const rta = await taskServices.get(id)
+      setTitle(rta.title)
+      setDescription(rta.description)
+      setStatus(rta.status)
+      setDateNum(String(rta.date))
+      setCategory(rta.category)
+    }
+  }
+
+  if(id && title === '') getTask()
 
   const handleSubmit = async (e:any) => {
     e.preventDefault()
-
     const date = new Date (dateNum)
     const category = await categoriesService.get(idCategory)
     const rta = await taskServices.add({title, date, category, description, status})
-
+    
+    if (rta) {
+      navigate('/tasks')
+    } 
   }
 
+  
+    
+
+  
 
 
   return (

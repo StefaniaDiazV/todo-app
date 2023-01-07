@@ -18,7 +18,7 @@ const add = async (task: payload) => {
     }
     const response = await fetch(`${DB_BASE_URL}/tasks.json`, options)
     const data = await response.json()
-    if(data.title) {
+    if(data.name) {
         return true
         } else {
         return false

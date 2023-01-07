@@ -5,10 +5,12 @@ import { Task } from "../../types";
 import { taskServices } from "../../services/tasks";
 import './style.scss'
 import { Button } from  "../../components/commons/Button";
+import { useNavigate } from "react-router-dom";
 
 const Tasks: FC = () => {
 
   const [tasks, setTasks] = useState<Task[]>([])
+  const navigate = useNavigate()
 
   const getTasks = async () => {
     const rta = await taskServices.getAll()
@@ -44,7 +46,7 @@ const Tasks: FC = () => {
                     /{new Date(
                       elem.date).getFullYear()}</Card.Subtitle>  
                     <Button variant="primary" handleClick={() => removeTasks(elem.id)} >Eliminar</Button>
-                    <Card.Link href="#">Editar</Card.Link>
+                    <Button variant="primary" handleClick={() => navigate(`/add-task/${elem.id}`)}>Editar</ Button>
                   </Card.Body>
                   </Card>
                   )

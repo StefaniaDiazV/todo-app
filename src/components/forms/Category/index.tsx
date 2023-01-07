@@ -35,6 +35,7 @@ const CategoryForm = () => {
         setIfError(false)
 
         let rta;
+        
         if(id){
             rta = await categoriesService.update({id, name});
         } else {

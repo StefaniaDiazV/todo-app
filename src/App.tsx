@@ -17,6 +17,7 @@ function App() {
           <Route path='tasks' element={ <Tasks />}/>
           <Route path='categories' element={ <Categories />}/>
           <Route path='add-task' element={ <AddTask/>}/>
+          <Route path='add-task/:id' element={ <AddTask/>}/>
           <Route path='add-category' element={ <AddCategory />}/>
           <Route path='add-category/:id' element={ <AddCategory />}/>
           <Route path='profile' element={ <Profile/>}/>

@@ -16,7 +16,10 @@ root.render(
           <Route path='login' element={<Login/>}/>
           <Route path='profile' element={<Profile/>}/>
           <Route path='signup' element={<SignUp/>}/>
-          <Route path='task/add' element={<AddTask/>}/>
+
+          <Route path='task/add' element={<AddTask/>}>
+            
+          </Route>
 
           <Route path='users/'>
             <Route index element={<Users/>}/>

@@ -1,19 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { userServices } from '../../../services/users';
 import './style.scss'
 
 const UserForm = () => {
-
-    const defaultValue = {
-        name: '' ,
-        lastname: '',
-        email: '',
-        password: '',
-        birthdate : '' ,
-    }
 
     const [name, setname] = useState('')
     const [lastname, setLastName] = useState('')
@@ -21,28 +13,37 @@ const UserForm = () => {
     const [password, setPassword] = useState('')
     const [date, setdate] = useState('')
 
-    //const [userData, setUserData] = useState (defaultValue)
-    const [ifError, setIfError] = useState(false)
     const navigate = useNavigate()
+    const {id} = useParams()
+
+    useEffect(() => {
+        if(id){
+            userServices.get(id).then(rta => {
+            setname(rta.name)
+            setLastName(rta.lastname)
+            setemail(rta.email)
+            setPassword(rta.password)
+            setdate(String(rta.birthdate))
+            })
+            
+        }
+    },[id])
 
     const handleSubmit =  async (e:any) => {
         e.preventDefault()
-
-      const birthdate = new Date (date)
-      
-
+        const birthdate = new Date (date)
         let rta ;
 
-        rta = await userServices.add({name, lastname, email, password, birthdate})
-
+        if(id){
+            rta = await userServices.update({id, name, lastname, email, password, birthdate});
+        } else {
+            rta = await userServices.add({name, lastname, email, password, birthdate})
+        }
+        console.log(rta)
         if (rta) {
-            
-            navigate('/users')
-          } else {
-            setIfError(true);
-          }
+             navigate('/users')
+          } 
     }
-
 
     return (
    

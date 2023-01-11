@@ -5,12 +5,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { categoriesService } from '../../../services';
 import { taskServices} from '../../../services/tasks';
 import { Category } from '../../../types';
+import moment from 'moment';
 import './style.scss'
 
 const TaskForm = () => {
 
+  var today = new Date();
+
   const [title, setTitle] = useState('')
-  const [dateNum, setDateNum] = useState('')
+  const [dateNum, setDateNum] = useState(moment().format('YYYY-MM-DD'))
   const [ idCategory, setIdCategory] = useState('')
   const [ description, setDescription ] = useState('')
   const [ status, setStatus] = useState('')
@@ -31,7 +34,7 @@ const TaskForm = () => {
           setTitle(rta.title)
           setDescription(rta.description)
           setStatus(rta.status)
-          setDateNum(String(rta.date))
+          setDateNum(moment(String(rta.date)).format('YYYY-MM-DD') )
           setIdCategory(rta.category.id)
         })
       } 

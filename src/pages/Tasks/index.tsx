@@ -6,12 +6,15 @@ import { taskServices } from "../../services/tasks";
 import './style.scss'
 import { Button } from  "../../components/commons/Button";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
+import 'moment/locale/es';
 
 const Tasks: FC = () => {
 
+  moment.locale('es')
+
   const [tasks, setTasks] = useState<Task[]>([])
   const navigate = useNavigate()
-
   const getTasks = async () => {
     const rta = await taskServices.getAll()
     setTasks(rta)
@@ -42,9 +45,9 @@ const Tasks: FC = () => {
                     <Card.Text>
                       {elem.description}
                       </Card.Text>
-                    <Card.Subtitle className="mb-2 text-muted">{new Date(elem.date).getDate().toLocaleString()}/{new Date(elem.date).getMonth()+1}
-                    /{new Date(
-                      elem.date).getFullYear()}</Card.Subtitle>  
+                    <Card.Subtitle className="mb-2 text-muted">
+                      {moment(String(elem.date)).format('LL')}
+                      </Card.Subtitle>  
                     <Button variant="primary" handleClick={() => removeTasks(elem.id)} >Eliminar</Button>
                     <Button variant="primary" handleClick={() => navigate(`/add-task/${elem.id}`)}>Editar</ Button>
                   </Card.Body>

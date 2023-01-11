@@ -3,7 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { userServices } from '../../../services/users';
+import moment from 'moment';
 import './style.scss'
+
 
 const UserForm = () => {
 
@@ -11,7 +13,7 @@ const UserForm = () => {
     const [lastname, setLastName] = useState('')
     const [email, setemail] = useState('')
     const [password, setPassword] = useState('')
-    const [date, setdate] = useState('')
+    const [date, setdate] = useState(moment().format('YYYY-MM-DD'))
 
     const navigate = useNavigate()
     const {id} = useParams()

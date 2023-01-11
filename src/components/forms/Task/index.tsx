@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { idText } from 'typescript';
 import { categoriesService } from '../../../services';
 import { taskServices} from '../../../services/tasks';
 import { Category } from '../../../types';
@@ -13,10 +12,11 @@ const TaskForm = () => {
   const [title, setTitle] = useState('')
   const [dateNum, setDateNum] = useState('')
   const [ idCategory, setIdCategory] = useState('')
-  const [category, setCategory] = useState<Category>()
   const [ description, setDescription ] = useState('')
   const [ status, setStatus] = useState('')
+
   const [categories, setCategories] = useState<Category[]>([])
+
 
   useEffect(() => {
     categoriesService.getAll().then((data) => setCategories(data))
@@ -25,34 +25,34 @@ const TaskForm = () => {
   const navigate = useNavigate()
   const {id} = useParams()
 
-  const getTask = async () => {
-    if (id)  {
-      const rta = await taskServices.get(id)
-      setTitle(rta.title)
-      setDescription(rta.description)
-      setStatus(rta.status)
-      setDateNum(String(rta.date))
-      setCategory(rta.category)
-    }
-  }
-
-  if(id && title === '') getTask()
+    useEffect(() => {
+      if (id)  {
+        taskServices.get(id).then(rta => {
+          setTitle(rta.title)
+          setDescription(rta.description)
+          setStatus(rta.status)
+          setDateNum(String(rta.date))
+          setIdCategory(rta.category.id)
+        })
+      } 
+    },[id])
 
   const handleSubmit = async (e:any) => {
     e.preventDefault()
     const date = new Date (dateNum)
-    const category = await categoriesService.get(idCategory)
-    const rta = await taskServices.add({title, date, category, description, status})
-    
-    if (rta) {
+    const category = categories.find((elem) => elem.id === idCategory)
+    let rta
+    if(category){
+      if(id){
+        rta = await taskServices.update({id, title, date, category, description, status});
+      }else{
+        rta = await taskServices.add({title, date, category, description, status})
+    } 
+    }
+     if (rta) {
       navigate('/tasks')
     } 
   }
-
-  
-    
-
-  
 
 
   return (
@@ -81,11 +81,10 @@ const TaskForm = () => {
       <Form.Group className="mb-3" controlId="categoria">
         <Form.Label>Categoria</Form.Label>
         <Form.Select onChange={e => setIdCategory(e.target.value) }>
-          {categories.map((elem) => {
-            return( 
-            <option key={elem.id} value={elem.id}>{elem.name}</option>
-            )
-          })}
+          <option selected disabled>Seleccionar una opción</option>
+          {categories.map((elem) => ( 
+            <option key={elem.id} value={elem.id} selected={elem.id === idCategory}>{elem.name}</option>
+          ))}
           
         </Form.Select>
       </Form.Group>

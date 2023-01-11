@@ -38,6 +38,12 @@ const update = async ({id, title, description, date, category}:Task) => {
         body: JSON.stringify({title, description, date, category})
     }
     const response = await fetch(`${DB_BASE_URL}/tasks/${id}.json`, options)
+    const data = await response.json()
+    if(data) {
+        return true
+        } else {
+        return false
+        }
 }
 
 const remove = async (id: string) => {

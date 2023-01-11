@@ -36,7 +36,12 @@ const update = async ({id, name, lastname, email, password, birthdate}: User) =>
         body: JSON.stringify({name, lastname, email, password, birthdate })
     }
     const response = await fetch(`${DB_BASE_URL}/users/${id}.json`, options)
-
+    const data = await response.json()
+    if(data) {
+        return true
+        } else {
+        return false
+        }
 }
 
 const remove = async (id: string) => {

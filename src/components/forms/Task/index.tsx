@@ -34,7 +34,7 @@ const TaskForm = () => {
           setTitle(rta.title)
           setDescription(rta.description)
           setStatus(rta.status)
-          setDateNum(moment(String(rta.date)).format('YYYY-MM-DD') )
+          setDateNum(moment(String(rta.date)).add(1, 'day').format('YYYY-MM-DD') )
           setIdCategory(rta.category.id)
         })
       } 
@@ -102,10 +102,17 @@ const TaskForm = () => {
 
       <Form.Group className="mb-3" controlId="estatus">
         <Form.Label>Estatus</Form.Label>
-        <Form.Control type="text" placeholder="Estatus" 
+        <Form.Select  
         value={status}
         onChange={e => setStatus(e.target.value)}
-        />
+        >
+          <option selected disabled >Seleccionar una opción</option>
+          <option>Sin iniciar</option>
+          <option>En progreso</option>
+          <option>Completada</option>
+          <option>Pospuesta</option>
+          <option>Cancelada</option>
+        </Form.Select>
       </Form.Group>
 
       <Button className='add-btn' variant="primary" type="submit">

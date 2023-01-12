@@ -1,5 +1,11 @@
-.main{
-    height: 100vh ;
-    padding: 3rem 4rem;
-    background-color: #edece8;
+.layout{
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 5rem;
+    .main{
+        padding: 3rem 4rem;
+        background-color: #edece8;
+        margin-bottom: 0.1px;
+        min-height: calc(100vh - 5rem)
+    }
 }

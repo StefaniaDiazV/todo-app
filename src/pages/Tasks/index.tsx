@@ -34,10 +34,10 @@ const Tasks: FC = () => {
                
                 <div className="container d-flex flex-column">
                   <h1>Tareas</h1>
-                <div className="container d-flex">
+                <div className="container d-flex flex-wrap">
                 {tasks.map((elem) => {
                   return(
-                  <Card className="task-cards" key={elem.id} style={{ width: '18rem' }}>
+                  <Card className="task-cards" key={elem.id} style={{width: '18rem' }}>
                     <Card.Body>
                     <Card.Title>{elem.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{elem.category.name}</Card.Subtitle>
@@ -46,7 +46,7 @@ const Tasks: FC = () => {
                       {elem.description}
                       </Card.Text>
                     <Card.Subtitle className="mb-2 text-muted">
-                      {moment(String(elem.date)).format('LL')}
+                      {moment(String(elem.date)).add(1, 'day').format('LL')}
                       </Card.Subtitle>  
                     <Button variant="primary" handleClick={() => removeTasks(elem.id)} >Eliminar</Button>
                     <Button variant="primary" handleClick={() => navigate(`/add-task/${elem.id}`)}>Editar</ Button>

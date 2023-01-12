@@ -7,6 +7,7 @@ import './style.scss'
 
 const CategoryForm = () => {
     const [name, setName] = useState('')
+    const [color, setColor] = useState("#ffffff")
     const [ifError, setIfError] = useState(false)
 
     const navigate = useNavigate()
@@ -14,8 +15,10 @@ const CategoryForm = () => {
 
     useEffect(() => {
         if (id) {
-            categoriesService.get(id).then((rta) => setName(rta.name))
-    }
+            categoriesService.get(id).then((rta) => {
+                setName(rta.name)
+                setColor(rta.color)
+            })}
      }, [id])
 
     const handelSubmit = async (e: any) => {
@@ -24,9 +27,9 @@ const CategoryForm = () => {
 
         let rta;
         if(id){
-            rta = await categoriesService.update({id, name});
+            rta = await categoriesService.update({id, name, color});
         } else {
-            rta = await categoriesService.add({ name });
+            rta = await categoriesService.add({ name , color });
         }
 
         if (rta) {
@@ -36,7 +39,6 @@ const CategoryForm = () => {
             setIfError(true);
           }
     }
-
     return (
         <div className='formBox'>
             <div className='addCategoryForm'>
@@ -48,7 +50,13 @@ const CategoryForm = () => {
                          value={name} 
                          onChange={e =>  setName(e.target.value)}
                         />
+                         <Form.Label>Elige un color</Form.Label>
+                        <Form.Control type="color"
+                        value={color}
+                        onChange={e => setColor(e.target.value)}
+                         />
                     </Form.Group>
+
                     <Button className='add-btn' variant="primary" type="submit">
                         Agregar
                     </Button>

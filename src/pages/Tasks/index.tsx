@@ -37,10 +37,10 @@ const Tasks: FC = () => {
                 <div className="container d-flex flex-wrap">
                 {tasks.map((elem) => {
                   return(
-                  <Card className="task-cards" key={elem.id} style={{width: '18rem' }}>
-                    <Card.Body>
+                  <Card className="task-cards" key={elem.id} >
+                    <Card.Body >
                     <Card.Title>{elem.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{elem.category.name}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 " style={{color:elem.category.color}} >{elem.category.name}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{elem.status}</Card.Subtitle>
                     <Card.Text>
                       {elem.description}

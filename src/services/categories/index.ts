@@ -48,6 +48,12 @@ const update = async ( { id, name }: Category) => {
         body: JSON.stringify({name})
     };
     const response = await fetch(`${DB_BASE_URL}/categories/${id}.json`, options)
+    const data = await response.json()
+    if(data) {
+        return true
+        } else {
+        return false
+        }
 }
 
 const remove = async (id: any) => {

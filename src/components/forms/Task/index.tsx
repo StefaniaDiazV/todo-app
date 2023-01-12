@@ -10,8 +10,6 @@ import './style.scss'
 
 const TaskForm = () => {
 
-  var today = new Date();
-
   const [title, setTitle] = useState('')
   const [dateNum, setDateNum] = useState(moment().format('YYYY-MM-DD'))
   const [ idCategory, setIdCategory] = useState('')

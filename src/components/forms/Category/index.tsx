@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,43 +6,32 @@ import { categoriesService } from '../../../services';
 import './style.scss'
 
 const CategoryForm = () => {
-
-    const [catName, setCatName ] = useState('')
-
-    const handleSubmit = (e:any) => {
-        e.preventDefault()
-        categoriesService.add({name: catName})
-    }
-
-
     const [name, setName] = useState('')
+    const [color, setColor] = useState("#ffffff")
     const [ifError, setIfError] = useState(false)
 
     const navigate = useNavigate()
     const  { id} = useParams()
 
-    const obtenerCategoria = async () => {
-      if (id)  {
-        const rta = await categoriesService.get(id)
-        setName(rta.name)
-    }
-}
+    useEffect(() => {
+        if (id) {
+            categoriesService.get(id).then((rta) => {
+                setName(rta.name)
+                setColor(rta.color)
+            })}
+     }, [id])
 
-    if(id && name === '') obtenerCategoria()
-
-    const enviarFormulario = async (e: any) => {
+    const handelSubmit = async (e: any) => {
         e.preventDefault()
         setIfError(false)
 
         let rta;
-        
         if(id){
-            rta = await categoriesService.update({id, name});
+            rta = await categoriesService.update({id, name, color});
         } else {
-            rta = await categoriesService.add({ name });
+            rta = await categoriesService.add({ name , color });
         }
 
-       
         if (rta) {
             setName("");
             navigate('/categories')
@@ -50,11 +39,10 @@ const CategoryForm = () => {
             setIfError(true);
           }
     }
-
     return (
         <div className='formBox'>
             <div className='addCategoryForm'>
-                <Form onSubmit={enviarFormulario}>
+                <Form onSubmit={handelSubmit}>
                 <h2>Agregar categoria</h2>
                     <Form.Group className="mb-3" controlId="nombre de categoria">
                         <Form.Label>Nombre</Form.Label>
@@ -62,7 +50,13 @@ const CategoryForm = () => {
                          value={name} 
                          onChange={e =>  setName(e.target.value)}
                         />
+                         <Form.Label>Elige un color</Form.Label>
+                        <Form.Control type="color"
+                        value={color}
+                        onChange={e => setColor(e.target.value)}
+                         />
                     </Form.Group>
+
                     <Button className='add-btn' variant="primary" type="submit">
                         Agregar
                     </Button>

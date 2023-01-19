@@ -2,10 +2,23 @@ import { Category } from "../../types"
 import { DB_BASE_URL } from "../../constants"
 import { mapToArray } from "../../helpers/mapToAray"
 
-const getAll = async (): Promise<Category[]> => {
+type GetAllPayload = {
+    text: string | null
+    color: string | null
+}
+
+const getAll = async (searchQuery: GetAllPayload): Promise<Category[]> => {
     const response = await fetch (`${DB_BASE_URL}/categories.json`)
     const data = await response.json()
-    return mapToArray<Category>(data);
+    const arrayData = mapToArray<Category>(data)
+
+    
+
+    return arrayData
+    .filter(cat => searchQuery.text ? cat.name.includes(searchQuery.text) : true)
+    .filter(cat => searchQuery.color ? cat.color.includes(searchQuery.color) : true)
+    
+    ;
 }
 
 const getAllUse = async (search?: string, color?: string): Promise<Category[]> => {

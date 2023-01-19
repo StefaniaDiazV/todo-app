@@ -14,13 +14,13 @@ const TaskForm = () => {
   const [dateNum, setDateNum] = useState(moment().format('YYYY-MM-DD'))
   const [ idCategory, setIdCategory] = useState('')
   const [ description, setDescription ] = useState('')
-  const [ status, setStatus] = useState('')
+  const [ status, setStatus] = useState('Sin iniciar')
 
   const [categories, setCategories] = useState<Category[]>([])
 
 
   useEffect(() => {
-    categoriesService.getAll().then((data) => setCategories(data))
+    categoriesService.getAll({text: "", color: ""}).then((data) => setCategories(data))
   },[])
 
   const navigate = useNavigate()
@@ -104,8 +104,8 @@ const TaskForm = () => {
         value={status}
         onChange={e => setStatus(e.target.value)}
         >
-          <option selected disabled >Seleccionar una opción</option>
-          <option>Sin iniciar</option>
+          <option disabled >Seleccionar una opción</option>
+          <option selected >Sin iniciar</option>
           <option>En progreso</option>
           <option>Completada</option>
           <option>Pospuesta</option>

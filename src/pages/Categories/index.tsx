@@ -1,14 +1,17 @@
 import { FC, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "../../components/commons/Button";
 import { Layout } from "../../components/layout"
 import { categoriesService } from "../../services";
 import { Category } from "../../types";
+import { FormCategories } from "../../components/forms";
+import { FormFields } from "../../components/forms/Categories/defaultValues";
 
 const Categories = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [search, setSearch] = useState("");
     const [color, setColor] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const navigate = useNavigate()
 
@@ -27,29 +30,28 @@ const Categories = () => {
 
     // ESTRUCTURA DEL USE EFECT
 
-    // useEffect(() => {
-    //  categoriesService.getAll().then((data) => setCategories(data))
-    // })
-
     useEffect(() => {
-      return () => {
-  
+
+      const criteria = {
+        text: searchParams.get('text'),
+        color: searchParams.get('color')
       }
-    }, [])
+     categoriesService.getAll(criteria).then((data) => setCategories(data))
+    },[searchParams])
 
-    const fetchData = () => {
-      categoriesService.getAllUse(search, color).then((data) => setCategories(data))
-    }
+    // useEffect(() => {
+    //   categoriesService.getAllUse(search, color).then((data) => setCategories(data))
+    // }, [search, color]);
 
-    useEffect(() => {
-      fetchData();
-      console.log('hola')
-    }, [search, color]);
 
     const borrarCategoriaUse = async (id: string) => {
       await categoriesService.remove(id);
-      fetchData();
+      categoriesService.getAll({text: "", color: ""}).then((data) => setCategories(data))
     };
+
+    const searchQuery = (params: FormFields ) => {
+      setSearchParams(params)
+    }
 
 
     return (
@@ -78,13 +80,16 @@ const Categories = () => {
   />
 </form>
 
+<FormCategories onSearch={searchQuery}/>
+
 <hr />
 
-      <table border={1}>
+      <table className="table" border={1}>
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Color</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -94,6 +99,7 @@ const Categories = () => {
               <tr key={elem.id}>
                 <td>{elem.id}</td>
                 <td>{elem.name}</td>
+                <td>{elem.color}</td>
                 <td>
                   <Button variant="primary" icon="pencil" handleClick={() => navigate(`/add-category/${elem.id}`)} />
                   <Button

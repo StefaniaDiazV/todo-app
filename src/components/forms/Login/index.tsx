@@ -1,8 +1,14 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './style.scss'
 
 const LoginForm = () => {
+
+  const  [user, setUser] =  useState('')
+  const  [pass, setPass] = useState('')
+
+
   return (
     <div className='formBox'>
         <div className='loginForm'>

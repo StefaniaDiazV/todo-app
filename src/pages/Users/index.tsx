@@ -4,6 +4,7 @@ import { userServices } from "../../services/users";
 import { User } from "../../types";
 import { Button } from "../../components/commons/Button";
 import { useNavigate } from "react-router-dom";
+import { useTest } from "../../hooks";
 
 const Users = () => {
 
@@ -21,6 +22,9 @@ const Users = () => {
       getUsers()
     }
 
+
+    const test = useTest()
+      console.log(test)
     return(
 
         <Layout>

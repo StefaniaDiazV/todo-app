@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { categoriesService } from '../../../services';
+import { AddCategoryForm } from '../../../types';
 import './style.scss'
 
 const CategoryForm = () => {
+
+    const {register, handleSubmit} = useForm<AddCategoryForm>()
+
+    const onSubmit = (data: AddCategoryForm) => {
+        categoriesService.addAxios(data)
+    }
+
     const [name, setName] = useState('')
     const [color, setColor] = useState("#ffffff")
     const [ifError, setIfError] = useState(false)

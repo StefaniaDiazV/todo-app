@@ -1,7 +1,19 @@
-import { User } from "../../types"
+import { SignUpForm, User } from "../../types"
 import { DB_BASE_URL } from "../../constants"
 import { mapToArray } from "../../helpers/mapToAray";
+import { api } from "../../utils/axios";
 
+
+const addAxios = async (user: SignUpForm) => {
+    const response = await api.post('/users.json',user)
+    return response.data
+}
+
+const getAxios = async () => {
+    const response = await api.get('/users.json')
+    return response.data
+}
+ 
 const getAll = async (): Promise<User[]> => {
     const response = await fetch (`${DB_BASE_URL}/users.json`);
     const data = await response.json()
@@ -51,4 +63,4 @@ const remove = async (id: string) => {
     await fetch(`${DB_BASE_URL}/users/${id}.json`, options)
 } 
 
-export  const userServices =  { getAll, get, update, remove, add }
+export  const userServices =  { getAll, get, update, remove, add, addAxios }

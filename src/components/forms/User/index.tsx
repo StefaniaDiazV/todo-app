@@ -5,9 +5,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { userServices } from '../../../services/users';
 import moment from 'moment';
 import './style.scss'
+import { api } from '../../../utils/axios';
+import { useForm } from 'react-hook-form';
+import { User , SignUpForm } from '../../../types';
 
 
 const UserForm = () => {
+
+    // api.get()
+
+    const { register, handleSubmit } = useForm<SignUpForm>()
+
+    const onsubmit = (data: SignUpForm) => {
+        userServices.addAxios(data)
+    }
 
     const [name, setname] = useState('')
     const [lastname, setLastName] = useState('')
@@ -31,7 +42,7 @@ const UserForm = () => {
         }
     },[id])
 
-    const handleSubmit =  async (e:any) => {
+    const handleSubmit1 =  async (e:any) => {
         e.preventDefault()
         const birthdate = new Date (date)
         let rta ;
@@ -51,7 +62,7 @@ const UserForm = () => {
    
     <div className='formBox'>
         <div className='userForm'>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit1}>
 
                 <h2>Registrarse</h2>
 
@@ -59,7 +70,8 @@ const UserForm = () => {
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control type="text" placeholder="Nombre"
                     value={name}
-                    onChange={e => setname(e.target.value)}
+                    // onChange={e => setname(e.target.value)}
+                    {...register('name')}
                     />
                 </Form.Group>
 
@@ -67,7 +79,8 @@ const UserForm = () => {
                     <Form.Label>Apellido</Form.Label>
                     <Form.Control type="text" placeholder="Apellido" 
                     value={lastname}
-                    onChange={e => setLastName(e.target.value)}
+                    //onChange={e => setLastName(e.target.value)}
+                    {...register('lastname')}
                     />
                 </Form.Group>
 
@@ -75,7 +88,8 @@ const UserForm = () => {
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" placeholder="Email" 
                     value={email}
-                    onChange={e => setemail(e.target.value)}
+                    //onChange={e => setemail(e.target.value)}
+                    {...register('email')}
                     />
                 </Form.Group>
 
@@ -83,7 +97,8 @@ const UserForm = () => {
                     <Form.Label>Contraseña</Form.Label>
                     <Form.Control type="password" placeholder="Contraseña" 
                     value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    //onChange={e => setPassword(e.target.value)}
+                    {...register('password')}
                     />
                 </Form.Group>
 
@@ -91,7 +106,8 @@ const UserForm = () => {
                     <Form.Label>Fecha de nacimiento</Form.Label>
                     <Form.Control type="date" placeholder="Fecha de nacimiento" 
                     value={date}
-                    onChange={e => setdate(e.target.value)}
+                    //onChange={e => setdate(e.target.value)}
+                    {...register('birthdate')}
                     />
                 </Form.Group>
 

@@ -92,7 +92,7 @@ const TaskForm = () => {
 
       <Form.Group className="mb-3" controlId="descripción">
         <Form.Label>Descripción</Form.Label>
-        <Form.Control type="text" placeholder="Descripción" 
+        <Form.Control type="text" as='textarea' rows={3} placeholder="Descripción" 
         value={description}
         onChange={e => setDescription(e.target.value)}
         />
@@ -101,11 +101,11 @@ const TaskForm = () => {
       <Form.Group className="mb-3" controlId="estatus">
         <Form.Label>Estatus</Form.Label>
         <Form.Select  
-        value={status}
-        onChange={e => setStatus(e.target.value)}
+        // value={status}
+        // onChange={e => setStatus(e.target.value)}
         >
-          <option disabled >Seleccionar una opción</option>
-          <option selected >Sin iniciar</option>
+          <option selected disabled >Seleccionar una opción</option>
+          <option>Sin iniciar</option>
           <option>En progreso</option>
           <option>Completada</option>
           <option>Pospuesta</option>

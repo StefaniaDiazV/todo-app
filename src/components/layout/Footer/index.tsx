@@ -2,7 +2,7 @@ import './style.scss'
 
 const Footer = () => {
     return (
-        <footer className='footer'>
+        <footer className='main-footer'>
             Hecho con ❤ por Stefania Diaz
         </footer>
     )

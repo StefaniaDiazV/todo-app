@@ -1,11 +1,19 @@
-import { Category } from "../../types"
+import { AddCategoryForm, Category } from "../../types"
 import { DB_BASE_URL } from "../../constants"
 import { mapToArray } from "../../helpers/mapToAray"
+import { api } from "../../utils/axios"
 
 type GetAllPayload = {
     text: string | null
     color: string | null
 }
+
+const addAxios = async (category: AddCategoryForm) => {
+    const response = await api.post('/categories.json', category)
+    return response.data
+}
+
+//___________________________________________________________________
 
 const getAll = async (searchQuery: GetAllPayload): Promise<Category[]> => {
     const response = await fetch (`${DB_BASE_URL}/categories.json`)
@@ -77,4 +85,4 @@ const remove = async (id: any) => {
     
 } 
 
-export const categoriesService = { getAll, get, add, update, remove, getAllUse }
+export const categoriesService = { getAll, get, add, update, remove, getAllUse, addAxios }

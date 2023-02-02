@@ -10,56 +10,49 @@ const Nav: FC = ({}) => {
             <ul className="nav-bar">
                 <li className="list-item">
                     <button className="btn-item">
-                        <NavLink to={'/login'}>
+                        <NavLink className='nav-link'to={'/login'}>
                         Login
                         </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
                     <button className="btn-item">
-                        <NavLink to={'/sign-up'}>
+                        <NavLink className='nav-link' to={'/sign-up'}>
                         SignUp
                         </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
                     <button className="btn-item">
-                        <NavLink to={'/dashboard'}>
+                        <NavLink className='nav-link' to={'/dashboard'}>
                         Dashboard
                         </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
                     <button className="btn-item">
-                        <NavLink to={'/tasks'}>
-                        Tasks
-                        </NavLink>
-                    </button>
-                </li>
-                <li className="list-item">
-                    <button className="btn-item">
-                        <NavLink to={'/categories'}>
+                        <NavLink className='nav-link' to={'/categories'}>
                         Categories
                         </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
                     <button className="btn-item">
-                        <NavLink to={'/add-task'}>
+                        <NavLink className='nav-link' to={'/add-task'}>
                         AddTask
                         </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
                     <button className="btn-item">
-                        <NavLink to={'/add-category'}>
+                        <NavLink className='nav-link' to={'/categories/add-category'}>
                         AddCategory
                         </NavLink>
                     </button>
                 </li>
                 <li className="list-item">
-                    <button className="btn-item">
-                        <NavLink to={'/profile'}>
+                    <button className="btn-item" >
+                        <NavLink className='nav-link' to={'/profile'}>
                         Profile
                         </NavLink>
                     </button>

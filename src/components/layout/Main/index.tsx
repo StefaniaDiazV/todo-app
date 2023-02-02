@@ -2,6 +2,7 @@ import { Header } from '../Header'
 import { Footer } from '../Footer'
 import { FC, ReactNode } from 'react'
 import './style.scss'
+import { Aside } from '../Aside'
 
 
 type Props = {
@@ -10,13 +11,16 @@ type Props = {
 
 const Main: FC<Props> = ({children}) => {
     return (
-        <div className='layout'>
-        <Header />
-        <main className='main'>
-            {children}
-        </main>
-        <Footer/>
-        </div>
+        <>
+            <Header />
+            <div className='d-flex flex-grow-1'>
+                <Aside/>
+                <main className='main  flex-grow-1'>
+                    {children}
+                </main>
+            </div>
+            <Footer/>
+        </>
     )
 }
 

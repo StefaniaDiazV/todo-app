@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { AddCategory, AddTask, Categories, Dashboard, Login, Profile, SignUp, Tasks, Users } from './pages';
+import { AddCategory, AddTask, Categories, Dashboard, Login, Profile, SignUp, Users } from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes }  from 'react-router-dom'
 import { Button } from './components/commons/Button';

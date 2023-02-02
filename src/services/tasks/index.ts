@@ -2,6 +2,15 @@ import { Task, User } from "../../types"
 import { DB_BASE_URL } from "../../constants"
 import { mapToArray } from "../../helpers/mapToAray";
 import { Tab } from "react-bootstrap";
+import { api } from "../../utils/axios";
+
+
+const removeAxios = async (id: string) => {
+    const response = await api.delete(`tasks/${id},json`)
+   
+} 
+
+//________________________________________________________
 
 const getAll = async (): Promise<Task[]> => {
     const response = await fetch (`${DB_BASE_URL}/tasks.json`);

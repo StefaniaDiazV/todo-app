@@ -7,6 +7,9 @@ export type User = {
     birthdate: Date | undefined
 }
 
+export type SignUpForm = Omit<User, 'id'>
+export type AddCategoryForm = Omit<Category, 'id'>
+
 export type Category = {
     id: string
     name: string

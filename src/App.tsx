@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AddCategory, AddTask, Categories, Dashboard, Login, Profile, SignUp, Tasks, Users } from './pages';
+import { AddCategory, AddTask, Categories, Dashboard, Login, Profile, SignUp, Users } from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes }  from 'react-router-dom'
 
@@ -14,14 +14,20 @@ function App() {
           <Route path='sign-up' element={ <SignUp/>}/>
           <Route path='sign-up/:id' element={ <SignUp/>}/>
 
-          <Route path='tasks' element={ <Tasks />}/>
-          <Route path='categories' element={ <Categories />}/>
+          <Route path='categories/'>
+            <Route index element={ <Categories />}/>
+            <Route path='add-category' element={ <AddCategory />}/>
+            <Route path='add-category/:id' element={ <AddCategory />}/>
+          </Route>
+
+          <Route path='users/'>
+            <Route index element={ <Users/>}/>
+          </Route>
+         
           <Route path='add-task' element={ <AddTask/>}/>
           <Route path='add-task/:id' element={ <AddTask/>}/>
-          <Route path='add-category' element={ <AddCategory />}/>
-          <Route path='add-category/:id' element={ <AddCategory />}/>
           <Route path='profile' element={ <Profile/>}/>
-          <Route path='users' element={ <Users/>}/>
+
         </Route> 
       </Routes>
     </BrowserRouter>

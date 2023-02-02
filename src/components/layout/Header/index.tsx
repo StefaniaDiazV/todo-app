@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import {Nav} from '../Nav'
+import {Nav} from '../NavBar'
 
 
 const Header: FC = () => {

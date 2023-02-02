@@ -1,15 +1,22 @@
-import './style.scss'
+import { useTasks } from "../../../hooks";
+import "./style.scss";
 
 const Aside = () => {
+  const { tasks } = useTasks();
 
-    return (
+  return (
+    <aside className="main-aside">
+      <ul>
+        <li>Tareas: {tasks.length}</li>
+        <li>
+          Compras: {tasks.filter((t) => t.category.name === "Compras").length}
+        </li>
+        <li>
+          Mandados: {tasks.filter((t) => t.category.name === "Mandados").length}
+        </li>
+      </ul>
+    </aside>
+  );
+};
 
-        <aside className="main-aside">
-            Aside
-        </aside>
-
-    )
-
-}
-
-export { Aside }
+export { Aside };

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Layout } from '../../components/layout/index'
-import { LoginForm, UserForm } from '../../components/forms'
+import { LoginForm} from '../../components/forms'
 
 
 const Login: FC = () => {

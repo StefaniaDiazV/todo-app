@@ -1,12 +1,12 @@
 import { FC } from "react"
 import { Layout } from "../../components/layout"
-import { UserForm } from '../../components/forms'
+import { SignupForm } from '../../components/forms'
 
 const SignUp: FC= () => {
     return (
         <div>
             <Layout>
-                <UserForm/>
+                <SignupForm/>
             </Layout>            
         </div>
     )

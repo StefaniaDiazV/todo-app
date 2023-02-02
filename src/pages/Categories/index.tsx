@@ -4,8 +4,6 @@ import { Button } from "../../components/commons/Button";
 import { Layout } from "../../components/layout"
 import { categoriesService } from "../../services";
 import { Category } from "../../types";
-import { FormCategories } from "../../components/forms";
-import { FormFields } from "../../components/forms/Categories/defaultValues";
 
 const Categories = () => {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -15,13 +13,13 @@ const Categories = () => {
 
     const navigate = useNavigate()
 
-  //   const obtenerCategorias = async () => {
-  //     const rta = await categoriesService.getAll();
+    const obtenerCategorias = async () => {
+      const rta = await categoriesService.getAllAxios();
   
-  //     setCategories(rta);
-  //   };
+      setCategories(rta);
+    };
   
-  //   if (!categories.length) obtenerCategorias();
+     if (!categories.length) obtenerCategorias();
   
   //   const borrarCategoria = async (id: string) => {
   //     await categoriesService.remove(id);
@@ -30,28 +28,6 @@ const Categories = () => {
 
     // ESTRUCTURA DEL USE EFECT
 
-    useEffect(() => {
-
-      const criteria = {
-        text: searchParams.get('text'),
-        color: searchParams.get('color')
-      }
-     categoriesService.getAll(criteria).then((data) => setCategories(data))
-    },[searchParams])
-
-    // useEffect(() => {
-    //   categoriesService.getAllUse(search, color).then((data) => setCategories(data))
-    // }, [search, color]);
-
-
-    const borrarCategoriaUse = async (id: string) => {
-      await categoriesService.remove(id);
-      categoriesService.getAll({text: "", color: ""}).then((data) => setCategories(data))
-    };
-
-    const searchQuery = (params: FormFields ) => {
-      setSearchParams(params)
-    }
 
 
     return (
@@ -80,8 +56,6 @@ const Categories = () => {
   />
 </form>
 
-<FormCategories onSearch={searchQuery}/>
-
 <hr />
 
       <table className="table" border={1}>
@@ -103,7 +77,7 @@ const Categories = () => {
                 <td>
                   <Button variant="primary" icon="pencil" handleClick={() => navigate(`/add-category/${elem.id}`)} />
                   <Button
-                    handleClick={() => borrarCategoriaUse(elem.id)}
+                    handleClick={() => (console.log('hi'))}
                     variant='danger' icon="trash" 
                   />
                 </td>

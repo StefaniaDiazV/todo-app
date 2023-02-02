@@ -6,17 +6,17 @@ const useAuth = () => {
         const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
         
         const login = async (email: string, pass: string) => {
-            const users = await userServices.getAll()
+        //     const users = await userServices.getAll()
 
-            const user = users.find(elem => elem.email === email)
+        //     const user = users.find(elem => elem.email === email)
     
-            if(user && user.password === pass) {
-                setIsUserLoggedIn(true)
-            } else {
-                console.log("Datos incorrectos")
-            }
-            // PROCESAR EL LOGIN DE LOS USUARIO CON UN USUARIO Y CONTRASEÑA 
-        }
+        //     if(user && user.password === pass) {
+        //         setIsUserLoggedIn(true)
+        //     } else {
+        //         console.log("Datos incorrectos")
+        //     }
+        //     // PROCESAR EL LOGIN DE LOS USUARIO CON UN USUARIO Y CONTRASEÑA 
+         }
 
         const loginWithToken  = () => {
            // PARA PRCESAR EL LOGIN XON LOS USUARIOS QUE INICIARON SECION CON ANTERIORIDAD Y TENEMOS SU TOKEN EN LOCA STORAGE 

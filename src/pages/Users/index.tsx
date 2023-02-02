@@ -12,13 +12,13 @@ const Users = () => {
     const navigate = useNavigate()
 
     const getUsers = async () => {
-        const rta = await userServices.getAll()
-        setUsers(rta)
+        //const rta = await userServices.getAll()
+        //setUsers(rta)
     }
     if(!users.length) getUsers()
 
     const deleteUser = async (id:string) => {
-      await userServices.remove(id)
+      await
       getUsers()
     }
 

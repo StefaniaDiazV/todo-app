@@ -1,43 +1,35 @@
-import { FC, useState } from "react"
-import { Layout } from "../../components/layout"
-import Card from 'react-bootstrap/Card';
-import { Task } from "../../types";
-import { taskServices } from "../../services/tasks";
-import './style.scss'
-import { Button } from  "../../components/commons/Button";
+import { FC, useState } from "react";
+import { Layout } from "../../components/layout";
+import "./style.scss";
 import { useNavigate } from "react-router-dom";
-import moment from 'moment';
-import 'moment/locale/es';
+import { useTasks } from "../../hooks";
+import { Col, Container, Row } from "react-bootstrap";
+import { Task as TaskCard } from "../../components/commons";
+
 
 const Dashboard: FC = () => {
+  const { tasks, removeTasks } = useTasks();
 
-  moment.locale('es')
+  return (
+    <div>
+      <Layout>
+        <h1>Tareas</h1>
+        <Container fluid className="p-4">
+          <Row>
+            {tasks.map((task) => (
+              <Col key={task.id} sm={6} md={4} lg={3} className="mb-4">
+                <TaskCard {...task} onDelete={removeTasks} />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </Layout>
+    </div>
+  );
+};
 
-  const [tasks, setTasks] = useState<Task[]>([])
-  const navigate = useNavigate()
-  const getTasks = async () => {
-    const rta = await taskServices.getAll()
-    setTasks(rta)
-  }
-
-  const removeTasks = async (id: string) => {
-    await taskServices.remove(id)
-    getTasks()
-    console.log('one')
-  }
-
-  if(!tasks.length) getTasks()
-
-    return (
-        <div>
-            <Layout>
-               
-                <div className="container d-flex flex-column">
-                  <h1>Tareas</h1>
-                <div className="container d-flex flex-wrap">
-                {tasks.map((elem) => {
-                  return(
-                  <Card className="task-cards" key={elem.id} >
+{
+  /* <Card className="task-cards" key={elem.id} >
                     <Card.Body >
                     <Card.Title>{elem.title}</Card.Title>
                     <Card.Subtitle className="mb-2 " style={{color:elem.category.color}} >{elem.category.name}</Card.Subtitle>
@@ -51,15 +43,7 @@ const Dashboard: FC = () => {
                     <Button variant="primary" handleClick={() => removeTasks(elem.id)} >Eliminar</Button>
                     <Button variant="primary" handleClick={() => navigate(`/add-task/${elem.id}`)}>Editar</ Button>
                   </Card.Body>
-                  </Card>
-                  )
-
-                })}
-                </div>
-                </div>
-            </Layout>            
-        </div>
-    )
+                  </Card> */
 }
 
-export { Dashboard }
+export { Dashboard };

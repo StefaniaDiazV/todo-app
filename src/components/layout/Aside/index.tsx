@@ -9,10 +9,10 @@ const Aside = () => {
       <ul>
         <li>Tareas: {tasks.length}</li>
         <li>
-          Compras: {tasks.filter((t) => t.category.name === "Compras").length}
+          Compras: {tasks && tasks.filter((t) => t.category?.name === "Compras").length}
         </li>
         <li>
-          Mandados: {tasks.filter((t) => t.category.name === "Mandados").length}
+          Mandados: {tasks.filter((t) => t.category?.name === "Mandados").length}
         </li>
       </ul>
     </aside>
